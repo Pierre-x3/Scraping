@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    environment:
+      URLDB: mongodb://db:27017/api-users
+    ports:
+      - "4000:4000"
+    command: npm start
