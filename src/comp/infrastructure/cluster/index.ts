@@ -18,7 +18,8 @@ export class Cluster {
       args: [
         '--disable-dev-shm-usage',
         '--start-maximized',
-        '--no-sandbox'
+        '--no-sandbox',
+        '--disable-setuid-sandbox'
       ]
     });
   }
