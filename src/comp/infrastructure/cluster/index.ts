@@ -19,14 +19,17 @@ export class Cluster {
         '--disable-dev-shm-usage',
         '--start-maximized',
         '--no-sandbox',
-        '--disable-setuid-sandbox'
+        '--disable-setuid-sandbox',
+        '--incognito'
       ]
     });
   }
 
   public async execute(callback: Function, params: {}): Promise<void | object>{
     this.browser = await this.getBrowser();
-    this.page = await this.browser.newPage();
+    let pages: Page[] = await this.browser.pages();
+    this.page = pages[0];
+
     try {
       return await callback(this.page, params);
     } catch (error: unknown) {

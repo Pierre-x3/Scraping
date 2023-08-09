@@ -1,6 +1,6 @@
 import { Page } from "puppeteer";
 import { Cluster } from "../infrastructure/cluster";
-import { youtubeParams } from "../domain/youtubeParams";
+import { Params } from "../domain/youtubeParams";
 
 export class YoutubeTitle {
 
@@ -8,13 +8,13 @@ export class YoutubeTitle {
     private cluster: Cluster
   ){}
 
-  async exec(params: youtubeParams ): Promise<object | void> {
+  public async exec(params: Params ): Promise<object | void> {
     let result = await this.cluster.execute(this.clusterCallback, params);
     await this.cluster.finish();
     return result;
   }
 
-  private async clusterCallback(page: Page, params: youtubeParams): Promise<object | void> {
+  private async clusterCallback(page: Page, params: Params): Promise<object | void> {
     await page.goto(params.url);
     
     let title = await page.evaluate(()=>{

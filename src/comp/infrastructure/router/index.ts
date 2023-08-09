@@ -1,15 +1,10 @@
-import express, { Router, Response, Request, NextFunction } from 'express';
-import { AppController } from '../controller';
-import { YoutubeTitle } from '../../application/youtube-title';
-import { Cluster } from '../cluster';
+import express, { Router } from 'express';
 import { asyncHandler } from '../../../helpers/asyncHandler';
-
-const cluster = new Cluster(true, 750000);
-const exchangeRate = new YoutubeTitle(cluster);
-const appController = new AppController(exchangeRate);
+import { appController } from './dependencies';
 
 const router: Router = express.Router();
 
-router.get('/', asyncHandler(appController.getExchangeRate.bind(appController)));
+router.get('/youtube-title', asyncHandler(appController.getYoutubetitle.bind(appController)));
+router.get('/pen', asyncHandler(appController.getExchangeRatePen.bind(appController)));
 
 export default router;
