@@ -18,8 +18,7 @@ export class AppController {
   async getExchangeRatePen(req: Request, res: Response, next: NextFunction){
     let { url } = req.body;
     
-    if(!url) 
-      return res.status(400).json({ message: 'The url is required.' });
+    if(!url) url = 'https://e-consulta.sunat.gob.pe/cl-at-ittipcam/tcS01Alias';
 
     const response = await this.exratePen.exec({ url });
     return res.status(200).json({ data: response });
